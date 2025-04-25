@@ -51,6 +51,14 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -158,6 +166,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "account.migrations.0002_remove_person_phone",
+        "description": "account.migrations.0002_remove_person_phone",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('account', '0001_initial'),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name='person',\n            name='phone',\n        ),\n    ]",
+        "detail": "account.migrations.0002_remove_person_phone",
+        "documentation": {}
+    },
+    {
         "label": "AccountConfig",
         "kind": 6,
         "importPath": "account.apps",
@@ -171,7 +188,7 @@
         "kind": 6,
         "importPath": "account.models",
         "description": "account.models",
-        "peekOfCode": "class person(AbstractUser):\n    email = models.EmailField(unique=True)\n    phone = models.CharField(max_length=15, unique=True)\n    address = models.TextField()\n    city = models.CharField(max_length=100)\n    state = models.CharField(max_length=100)\n    country = models.CharField(max_length=100)\n    def _str__(self):\n        return self.username",
+        "peekOfCode": "class person(AbstractUser):\n    email = models.EmailField(unique=True)\n    address = models.TextField()\n    city = models.CharField(max_length=100)\n    state = models.CharField(max_length=100)\n    country = models.CharField(max_length=100)\n    def _str__(self):\n        return self.username",
         "detail": "account.models",
         "documentation": {}
     },
