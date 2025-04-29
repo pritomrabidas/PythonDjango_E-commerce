@@ -5,6 +5,7 @@ from .views import *
 
 urlpatterns = [
     path('login/', login, name='login'),
+    path('verify_otp/', verify_otp, name='verify_otp'),
 ]
 
 if settings.DEBUG:

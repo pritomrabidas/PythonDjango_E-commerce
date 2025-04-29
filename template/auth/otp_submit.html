@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify OTP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    input[type="text"] {
+      text-align: center;
+      font-size: 1.5rem;
+      letter-spacing: 0.5rem;
+    }
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-purple-500 to-indigo-600 min-h-screen flex items-center justify-center">
+
+  <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md animate-fadeIn">
+    <h2 class="text-3xl font-bold text-center text-indigo-700 mb-6">Enter OTP</h2>
+
+    <p class="text-gray-500 text-center mb-8">We have sent a verification code to your email</p>
+
+    <form class="flex flex-col gap-6">
+      <div class="flex justify-center gap-4">
+        <input type="text" maxlength="1" class="w-14 h-14 border-2 border-gray-300 rounded-xl focus:border-indigo-600 transition" />
+        <input type="text" maxlength="1" class="w-14 h-14 border-2 border-gray-300 rounded-xl focus:border-indigo-600 transition" />
+        <input type="text" maxlength="1" class="w-14 h-14 border-2 border-gray-300 rounded-xl focus:border-indigo-600 transition" />
+        <input type="text" maxlength="1" class="w-14 h-14 border-2 border-gray-300 rounded-xl focus:border-indigo-600 transition" />
+      </div>
+
+      <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-xl transition duration-300">
+        Verify
+      </button>
+    </form>
+
+    <p class="text-center text-sm text-gray-400 mt-6">
+      Didn’t receive code? 
+      <a href="#" class="text-indigo-600 hover:underline font-semibold">Resend</a>
+    </p>
+  </div>
+
+  <script>
+    // Small UX improvement: auto-focus next input after typing
+    const inputs = document.querySelectorAll('input[type="text"]');
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', () => {
+        if (input.value.length === 1 && index < inputs.length - 1) {
+          inputs[index + 1].focus();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

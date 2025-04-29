@@ -20,19 +20,21 @@ def login(request):
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
         if password == confirm_password:
-            user = CustomUser.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, phone=phone, address=address, city=city, state=state, country=country, zipcode=zipcode, image=image, password=password)
-            user.save()
-            send_registration_email(email)
-            return redirect('login')
+            otp = random.randint(0000, 9999)
+            # user = CustomUser.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, phone=phone, address=address, city=city, state=state, country=country, zipcode=zipcode, image=image, password=password ,otp=otp)
+            # user.save()
+            send_registration_email(email, otp)
+            return redirect('verify_otp')
     return render(request, 'auth/login.html')
 
-def send_registration_email(email):
-    otp = random.randint(0000, 9999)
+def send_registration_email(email, otp):
     subject = 'Welcome to Our Site'
     message = f'Thank you for registering with us your otp is {otp}.'
     from_email = settings.EMAIL_HOST_USER
-    recipient_list = [email]  
-    if isinstance(recipient_list, list) or isinstance(recipient_list, tuple):
-        send_mail(subject, message, from_email, recipient_list)
-    else:
-        raise ValueError("Recipient list must be a list or tuple.")
+    recipient_list = [email] 
+    send_mail(subject, message, from_email, recipient_list)
+
+def verify_otp(request):
+    if request.method == 'POST':
+        otp = request.POST.get('otp')
+    return render(request, 'auth/otp_submit.html')

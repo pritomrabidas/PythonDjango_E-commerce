@@ -367,7 +367,7 @@
         "kind": 5,
         "importPath": "account.urls",
         "description": "account.urls",
-        "peekOfCode": "urlpatterns = [\n    path('login/', login, name='login'),\n]\nif settings.DEBUG:\n    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\n    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)",
+        "peekOfCode": "urlpatterns = [\n    path('login/', login, name='login'),\n    path('verify_otp/', verify_otp, name='verify_otp'),\n]\nif settings.DEBUG:\n    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\n    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)",
         "detail": "account.urls",
         "documentation": {}
     },
@@ -385,7 +385,16 @@
         "kind": 2,
         "importPath": "account.views",
         "description": "account.views",
-        "peekOfCode": "def send_registration_email(email):\n    otp = random.randint(0000, 9999)\n    subject = 'Welcome to Our Site'\n    message = f'Thank you for registering with us your otp is {otp}.'\n    from_email = settings.EMAIL_HOST_USER\n    recipient_list = [email]  \n    if isinstance(recipient_list, list) or isinstance(recipient_list, tuple):\n        send_mail(subject, message, from_email, recipient_list)\n    else:\n        raise ValueError(\"Recipient list must be a list or tuple.\")",
+        "peekOfCode": "def send_registration_email(email, otp):\n    subject = 'Welcome to Our Site'\n    message = f'Thank you for registering with us your otp is {otp}.'\n    from_email = settings.EMAIL_HOST_USER\n    recipient_list = [email] \n    send_mail(subject, message, from_email, recipient_list)\ndef verify_otp(request):\n    if request.method == 'POST':\n        otp = request.POST.get('otp')\n    return render(request, 'auth/otp_submit.html')",
+        "detail": "account.views",
+        "documentation": {}
+    },
+    {
+        "label": "verify_otp",
+        "kind": 2,
+        "importPath": "account.views",
+        "description": "account.views",
+        "peekOfCode": "def verify_otp(request):\n    if request.method == 'POST':\n        otp = request.POST.get('otp')\n    return render(request, 'auth/otp_submit.html')",
         "detail": "account.views",
         "documentation": {}
     },
