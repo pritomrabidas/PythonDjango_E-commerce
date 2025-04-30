@@ -23,16 +23,21 @@ def login(request):
             otp = random.randint(0000, 9999)
             # user = CustomUser.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, phone=phone, address=address, city=city, state=state, country=country, zipcode=zipcode, image=image, password=password ,otp=otp)
             # user.save()
-            send_registration_email(email, otp)
-            return redirect('verify_otp')
+            send_registration_email(email,otp)
+            return redirect('login')
     return render(request, 'auth/login.html')
 
-def send_registration_email(email, otp):
-    subject = 'Welcome to Our Site'
-    message = f'Thank you for registering with us your otp is {otp}.'
-    from_email = settings.EMAIL_HOST_USER
-    recipient_list = [email] 
-    send_mail(subject, message, from_email, recipient_list)
+def send_registration_email(email,otp):
+    try:
+        subject = 'Welcome to Our Site'
+        message = f'Thank you for registering with us. Your OTP is {otp} .'
+        from_email = settings.EMAIL_HOST_USER 
+        recipient_list = [email]
+        send_mail(subject, message, from_email, recipient_list)
+        print("Email sent successfully")
+    except Exception as e:
+        print("Email sending failed:", e)
+
 
 def verify_otp(request):
     if request.method == 'POST':
