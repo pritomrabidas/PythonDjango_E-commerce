@@ -75,6 +75,22 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -345,6 +361,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "account.migrations.0004_alter_customuser_is_active_and_more",
+        "description": "account.migrations.0004_alter_customuser_is_active_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('account', '0003_customuser_otp'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='customuser',\n            name='is_active',\n            field=models.BooleanField(default=False),\n        ),",
+        "detail": "account.migrations.0004_alter_customuser_is_active_and_more",
+        "documentation": {}
+    },
+    {
         "label": "AccountConfig",
         "kind": 6,
         "importPath": "account.apps",
@@ -385,7 +410,7 @@
         "kind": 2,
         "importPath": "account.views",
         "description": "account.views",
-        "peekOfCode": "def send_registration_email(email,otp):\n    try:\n        subject = 'Welcome to Our Site'\n        message = f'Thank you for registering with us. Your OTP is {otp} .'\n        from_email = settings.EMAIL_HOST_USER \n        recipient_list = [email]\n        send_mail(subject, message, from_email, recipient_list)\n        print(\"Email sent successfully\")\n    except Exception as e:\n        print(\"Email sending failed:\", e)",
+        "peekOfCode": "def send_registration_email(email,otp):\n    try:\n        subject = 'Welcome to Our Site'\n        message = f'Thank you for registering with us. Your OTP is {otp} .'\n        from_email = settings.EMAIL_HOST_USER \n        recipient_list = [email]\n        send_mail(subject, message, from_email, recipient_list)\n    except Exception as e:\n        print(\"Email sending failed:\", e)\ndef verify_otp(request):",
         "detail": "account.views",
         "documentation": {}
     },
@@ -394,7 +419,7 @@
         "kind": 2,
         "importPath": "account.views",
         "description": "account.views",
-        "peekOfCode": "def verify_otp(request):\n    if request.method == 'POST':\n        otp = request.POST.get('otp')\n    return render(request, 'auth/otp_submit.html')",
+        "peekOfCode": "def verify_otp(request):\n    if request.method == 'POST':\n        otp = request.POST.get('otp')\n        if otp:\n            user = CustomUser.objects.filter(otp=otp).first()\n            if user:\n                user.is_verified = True\n                user.save()\n                return redirect('login')\n        else:",
         "detail": "account.views",
         "documentation": {}
     },

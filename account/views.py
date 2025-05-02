@@ -20,11 +20,11 @@ def login(request):
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
         if password == confirm_password:
-            otp = random.randint(0000, 9999)
-            # user = CustomUser.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, phone=phone, address=address, city=city, state=state, country=country, zipcode=zipcode, image=image, password=password ,otp=otp)
-            # user.save()
+            otp = random.randint(1000, 9999)
+            user = CustomUser.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, phone=phone, address=address, city=city, state=state, country=country, zipcode=zipcode, image=image, password=password ,otp=otp)
+            user.save()
             send_registration_email(email,otp)
-            return redirect('login')
+            return redirect('verify_otp')
     return render(request, 'auth/login.html')
 
 def send_registration_email(email,otp):
@@ -34,7 +34,6 @@ def send_registration_email(email,otp):
         from_email = settings.EMAIL_HOST_USER 
         recipient_list = [email]
         send_mail(subject, message, from_email, recipient_list)
-        print("Email sent successfully")
     except Exception as e:
         print("Email sending failed:", e)
 
@@ -42,4 +41,29 @@ def send_registration_email(email,otp):
 def verify_otp(request):
     if request.method == 'POST':
         otp = request.POST.get('otp')
+        if otp:
+            user = CustomUser.objects.filter(otp=otp).first()
+            if user:
+                user.is_verified = True
+                user.save()
+                return redirect('login')
+        else:
+            return redirect('verify_otp')
+        
     return render(request, 'auth/otp_submit.html')
+
+# def logout(request):
+#     logout(request)
+#     return redirect('login')
+
+# def login(request):
+#     if request.method == 'POST':
+#         username = request.POST.get('name')
+#         password = request.POST.get('password')
+#         user = authenticate(request, username=username, password=password)
+#         if user is not None:
+#             login(request, user)
+#             return redirect('home')
+#         else:
+#             return render(request, 'auth/login.html', {'error': 'Invalid credentials'})
+#     return render(request, 'auth/login.html')
