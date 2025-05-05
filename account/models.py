@@ -11,7 +11,7 @@ class CustomUser(AbstractUser):
     zipcode = models.CharField(max_length=20)
     image = models.ImageField(upload_to='profile_images/', default='default.jpg')
     is_verified = models.BooleanField(default=True)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     otp = models.CharField(max_length=4, blank=True, null=True)
 
     def _str__(self):

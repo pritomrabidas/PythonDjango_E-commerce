@@ -91,6 +91,22 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -108,6 +124,14 @@
     },
     {
         "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "messages",
         "importPath": "django.contrib",
         "description": "django.contrib",
         "isExtraImport": true,
@@ -370,6 +394,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "account.migrations.0005_alter_customuser_password_alter_customuser_username",
+        "description": "account.migrations.0005_alter_customuser_password_alter_customuser_username",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('account', '0004_alter_customuser_is_active_and_more'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='customuser',\n            name='password',\n            field=models.CharField(max_length=128),\n        ),",
+        "detail": "account.migrations.0005_alter_customuser_password_alter_customuser_username",
+        "documentation": {}
+    },
+    {
         "label": "AccountConfig",
         "kind": 6,
         "importPath": "account.apps",
@@ -392,16 +425,16 @@
         "kind": 5,
         "importPath": "account.urls",
         "description": "account.urls",
-        "peekOfCode": "urlpatterns = [\n    path('login/', login, name='login'),\n    path('verify_otp/', verify_otp, name='verify_otp'),\n]\nif settings.DEBUG:\n    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\n    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)",
+        "peekOfCode": "urlpatterns = [\n    path('reg/', reg, name='reg'),\n    path('login/', login_user, name='login'),\n    path('verify_otp/', verify_otp, name='verify_otp'),\n]\nif settings.DEBUG:\n    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\n    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)",
         "detail": "account.urls",
         "documentation": {}
     },
     {
-        "label": "login",
+        "label": "reg",
         "kind": 2,
         "importPath": "account.views",
         "description": "account.views",
-        "peekOfCode": "def login(request):\n    if request.method == 'POST':\n        username = request.POST.get('username')\n        first_name = request.POST.get('first_name')\n        last_name = request.POST.get('last_name')\n        email = request.POST.get('email')\n        phone = request.POST.get('phone')\n        address = request.POST.get('address')\n        city = request.POST.get('city')\n        state = request.POST.get('state')",
+        "peekOfCode": "def reg(request):\n    if request.method == 'POST':\n        username = request.POST.get('username')\n        first_name = request.POST.get('first_name')\n        last_name = request.POST.get('last_name')\n        email = request.POST.get('email')\n        phone = request.POST.get('phone')\n        address = request.POST.get('address')\n        city = request.POST.get('city')\n        state = request.POST.get('state')",
         "detail": "account.views",
         "documentation": {}
     },
@@ -420,6 +453,15 @@
         "importPath": "account.views",
         "description": "account.views",
         "peekOfCode": "def verify_otp(request):\n    if request.method == 'POST':\n        otp = request.POST.get('otp')\n        if otp:\n            user = CustomUser.objects.filter(otp=otp).first()\n            if user:\n                user.is_verified = True\n                user.save()\n                return redirect('login')\n        else:",
+        "detail": "account.views",
+        "documentation": {}
+    },
+    {
+        "label": "login_user",
+        "kind": 2,
+        "importPath": "account.views",
+        "description": "account.views",
+        "peekOfCode": "def login_user(request):\n    if request.method == 'POST':\n        username = request.POST.get('username')\n        password = request.POST.get('password')\n        user = authenticate(request, username=username, password=password)\n        if user is not None:\n            if user.is_verified:\n                auth_login(request, user)\n                return redirect('home')\n            else:",
         "detail": "account.views",
         "documentation": {}
     },

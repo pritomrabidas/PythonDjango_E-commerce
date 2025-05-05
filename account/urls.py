@@ -4,7 +4,8 @@ from django.conf.urls.static import static
 from .views import *
 
 urlpatterns = [
-    path('login/', login, name='login'),
+    path('reg/', reg, name='reg'),
+    path('login/', login_user, name='login'),
     path('verify_otp/', verify_otp, name='verify_otp'),
 ]
 

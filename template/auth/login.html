@@ -8,9 +8,6 @@
                   <a class="active" data-bs-toggle="tab" href="#lg1">
                     <h4>login</h4>
                   </a>
-                  <a data-bs-toggle="tab" href="#lg2">
-                    <h4>register</h4>
-                  </a>
                 </div>
                 <div class="tab-content">
                   <div id="lg1" class="tab-pane active">
@@ -20,7 +17,7 @@
                           {% csrf_token %}
                           <input
                             type="text"
-                            name="name"
+                            name="username"
                             placeholder="Username"
                           />
                           <input
@@ -42,83 +39,6 @@
                       </div>
                     </div>
                   </div>
-                  <div id="lg2" class="tab-pane">
-                     <div class="login-form-container">
-    <div class="login-register-form">
-      <form action="{% url 'login' %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input
-          type="text" 
-          name="username"
-          placeholder="Username"
-        />
-        <input
-          type="text"
-          name="first_name"
-          required
-          placeholder="First Name"/>
-          <input 
-          type="text"
-          required
-          name="last_name" 
-          placeholder="Last Name"/>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-        />
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Phone"
-        />
-        <input
-          type="text"
-          name="address"
-          placeholder="Address"
-        />
-        <input
-          type="text"
-          name="city"
-          placeholder="City"
-        />
-        <input
-          type="text"
-          name="state"
-          placeholder="State"
-        />
-        <input
-          type="text"
-          name="country"
-          placeholder="Country"
-        />
-        <input
-          type="text"
-          name="zipcode"
-          placeholder="Zip Code"
-        />
-        <input
-          type="file"
-          name="image"
-          accept="image/*"
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-        />
-        <input
-          type="password"
-          name="confirm_password"
-          placeholder="Confirm Password"
-        />
-        <div class="button-box">
-          <button type="submit"><span>Register</span></button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
                 </div>
               </div>
             </div>

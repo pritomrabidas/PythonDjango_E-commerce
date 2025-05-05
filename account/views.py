@@ -1,10 +1,11 @@
 from django.shortcuts import render , redirect
 from django.core.mail import send_mail
 from .models import CustomUser
-from django.contrib.auth import authenticate, login 
+from django.contrib.auth import authenticate, login as auth_login
 from django.conf import settings
+from django.contrib import messages
 import random
-def login(request):
+def reg(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         first_name = request.POST.get('first_name')
@@ -25,7 +26,10 @@ def login(request):
             user.save()
             send_registration_email(email,otp)
             return redirect('verify_otp')
-    return render(request, 'auth/login.html')
+        else:
+            messages.error(request, "Passwords do not match.")
+        
+    return render(request, 'auth/registration.html')
 
 def send_registration_email(email,otp):
     try:
@@ -56,14 +60,17 @@ def verify_otp(request):
 #     logout(request)
 #     return redirect('login')
 
-# def login(request):
-#     if request.method == 'POST':
-#         username = request.POST.get('name')
-#         password = request.POST.get('password')
-#         user = authenticate(request, username=username, password=password)
-#         if user is not None:
-#             login(request, user)
-#             return redirect('home')
-#         else:
-#             return render(request, 'auth/login.html', {'error': 'Invalid credentials'})
-#     return render(request, 'auth/login.html')
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            if user.is_verified:
+                auth_login(request, user)
+                return redirect('home')
+            else:
+                return render(request, 'auth/login.html', {'error': 'Your account is not verified yet.'})
+        else:
+            return render(request, 'auth/login.html', {'error': 'Invalid credentials'})
+    return render(request, 'auth/login.html')
