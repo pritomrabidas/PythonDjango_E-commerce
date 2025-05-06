@@ -1,11 +1,15 @@
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect ,HttpResponseRedirect
 from django.core.mail import send_mail
 from .models import CustomUser
 from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import logout as auth_logout
 from django.conf import settings
 from django.contrib import messages
 import random
 def reg(request):
+    if request.user.is_authenticated:
+        messages.error(request, "You are already logged in.")
+        return redirect('home')
     if request.method == 'POST':
         username = request.POST.get('username')
         first_name = request.POST.get('first_name')
@@ -43,6 +47,8 @@ def send_registration_email(email,otp):
 
 
 def verify_otp(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     if request.method == 'POST':
         otp = request.POST.get('otp')
         if otp:
@@ -56,11 +62,13 @@ def verify_otp(request):
         
     return render(request, 'auth/otp_submit.html')
 
-# def logout(request):
-#     logout(request)
-#     return redirect('login')
+def logout(request):
+    auth_logout(request)
+    return redirect('reg')
 
 def login_user(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -74,3 +82,46 @@ def login_user(request):
         else:
             return render(request, 'auth/login.html', {'error': 'Invalid credentials'})
     return render(request, 'auth/login.html')
+
+def forget(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        user = CustomUser.objects.filter(email=email).first()
+        if user:
+            otp = random.randint(1000, 9999)
+            user.otp = otp
+            user.save()
+            send_registration_email(email, otp)
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        
+    return render(request, 'auth/forget.html')
+
+def forget_otp(request):
+    if request.method == 'POST':
+        otp = request.POST.get('otp')
+        if otp:
+            user = CustomUser.objects.filter(otp=otp).first()
+            if user:
+                user.is_verified = True
+                user.save()
+                return redirect('forget_pass')
+            else:
+                messages.error(request, "Invalid OTP.")
+        else:
+            messages.error(request, "Please enter the OTP.")
+    return redirect('forget')
+
+def forget_pass(request):
+    if request.method == 'POST':
+        pass1 = request.POST.get('pass1')
+        pass2 = request.POST.get('pass2')
+        user = CustomUser.objects.filter(is_verified=True).first()
+        if user:
+            if pass1 == pass2:
+                user.set_password(pass1)
+                user.save()
+                return redirect('home')
+            else:
+                messages.error(request, "Passwords do not match.")      
+                    
+    return render(request, 'auth/forget_pass.html')

@@ -7,6 +7,11 @@ urlpatterns = [
     path('reg/', reg, name='reg'),
     path('login/', login_user, name='login'),
     path('verify_otp/', verify_otp, name='verify_otp'),
+    path('logout/', logout , name='logout'),
+    path('forget',forget ,name='forget'),
+    path('forget_otp',forget_otp ,name='forget_otp'),
+    path('forget_pass',forget_pass ,name='forget_pass'),
+    
 ]
 
 if settings.DEBUG:

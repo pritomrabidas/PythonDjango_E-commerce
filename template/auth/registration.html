@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block title %}Login & Registration{% endblock%} 
+{% extends 'base.html' %} {% block title %}Login & Registration{% endblock%}
 {%block body %}
 <div class="login-register-area py-5">
   <div class="container">
@@ -8,7 +8,6 @@
           <div class="card-body p-5">
             <h2 class="text-center mb-4">Create an Account</h2>
             <form
-              action="{% url 'reg' %}"
               method="POST"
               enctype="multipart/form-data"
               novalidate
@@ -157,6 +156,7 @@
               Already have an account?
               <a href="{% url 'login' %}">Login here</a>
             </p>
+            
           </div>
         </div>
       </div>
