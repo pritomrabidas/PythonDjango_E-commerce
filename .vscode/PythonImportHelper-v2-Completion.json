@@ -107,6 +107,38 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -339,6 +371,14 @@
         "documentation": {}
     },
     {
+        "label": "redirect",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
         "label": "render",
         "importPath": "django.shortcuts",
         "description": "django.shortcuts",
@@ -463,6 +503,14 @@
         "documentation": {}
     },
     {
+        "label": "CustomUser",
+        "importPath": "account.models",
+        "description": "account.models",
+        "isExtraImport": true,
+        "detail": "account.models",
+        "documentation": {}
+    },
+    {
         "label": "sys",
         "kind": 6,
         "isExtraImport": true,
@@ -514,6 +562,15 @@
         "description": "account.migrations.0005_alter_customuser_password_alter_customuser_username",
         "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('account', '0004_alter_customuser_is_active_and_more'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='customuser',\n            name='password',\n            field=models.CharField(max_length=128),\n        ),",
         "detail": "account.migrations.0005_alter_customuser_password_alter_customuser_username",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "account.migrations.0006_alter_customuser_is_active_alter_customuser_password_and_more",
+        "description": "account.migrations.0006_alter_customuser_is_active_alter_customuser_password_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('account', '0005_alter_customuser_password_alter_customuser_username'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='customuser',\n            name='is_active',\n            field=models.BooleanField(default=True),\n        ),",
+        "detail": "account.migrations.0006_alter_customuser_is_active_alter_customuser_password_and_more",
         "documentation": {}
     },
     {
@@ -904,6 +961,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "home.migrations.0002_slider_remove_brand_slug_remove_size_slug",
+        "description": "home.migrations.0002_slider_remove_brand_slug_remove_size_slug",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('home', '0001_initial'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Slider',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),\n                ('image', models.ImageField(upload_to='slider_images/')),",
+        "detail": "home.migrations.0002_slider_remove_brand_slug_remove_size_slug",
+        "documentation": {}
+    },
+    {
         "label": "HomeConfig",
         "kind": 6,
         "importPath": "home.apps",
@@ -971,7 +1037,7 @@
         "kind": 5,
         "importPath": "home.urls",
         "description": "home.urls",
-        "peekOfCode": "urlpatterns = [\n    path('', home, name='home'),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('', home, name='home'),\n    path('update', update, name='update'),\n]",
         "detail": "home.urls",
         "documentation": {}
     },
@@ -980,7 +1046,16 @@
         "kind": 2,
         "importPath": "home.views",
         "description": "home.views",
-        "peekOfCode": "def home(request):\n    return render(request, 'home/home.html')",
+        "peekOfCode": "def home(request):\n    sliders = Slider.objects.all()\n    return render(request, 'home/home.html', {'sli': sliders})\n@login_required(login_url='login')\ndef update(request):\n    update = request.user\n    update = CustomUser.objects.all()\n    if request.method == 'POST':\n        username = request.POST.get('username')\n        email = request.POST.get('email')",
+        "detail": "home.views",
+        "documentation": {}
+    },
+    {
+        "label": "update",
+        "kind": 2,
+        "importPath": "home.views",
+        "description": "home.views",
+        "peekOfCode": "def update(request):\n    update = request.user\n    update = CustomUser.objects.all()\n    if request.method == 'POST':\n        username = request.POST.get('username')\n        email = request.POST.get('email')\n        phone = request.POST.get('phone')\n        address = request.POST.get('address')\n        city = request.POST.get('city')\n        state = request.POST.get('state')",
         "detail": "home.views",
         "documentation": {}
     },

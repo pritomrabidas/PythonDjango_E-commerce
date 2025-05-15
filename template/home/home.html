@@ -18,42 +18,41 @@
         class="hero-slide-item slider-height swiper-slide bg-color1"
         data-bg-image="{% static 'assets/images/hero/bg/hero-bg-1.webp' %}"
       >
+        {% for i in sli %}
         <div class="container h-100">
           <div class="row h-100">
-            <div
-              class="col-xl-6 col-lg-6 col-md-6 col-sm-6 align-self-center sm-center-view"
-            >
-              <div class="hero-slide-content slider-animated-1">
-                <span class="category">Welcome To Hmart</span>
-                <h2 class="title-1">
+        
+            <!-- Text Content Section -->
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 d-flex align-items-center justify-content-center text-center text-md-start sm-center-view">
+              <div class="hero-slide-content slider-animated-1" style="color: black !important;">
+                <span class="category" style="color: black !important;">Welcome To Hmart</span>
+                <h2 class="title-1" style="color: black !important;">
                   Your Home <br />
                   Smart Devices & <br />
                   Best Solution
                 </h2>
-                <a
-                  href="shop-left-sidebar.html"
-                  class="btn btn-primary text-capitalize"
-                  >Shop All Devices</a
-                >
+                <a href="shop-left-sidebar.html" class="btn btn-primary text-capitalize">
+                  Shop All Devices
+                </a>
               </div>
             </div>
-            <div
-              class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-flex justify-content-center position-relative align-items-end"
-            >
+        
+            <!-- Image Section -->
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center align-items-end position-relative">
               <div class="show-case">
                 <div class="hero-slide-image">
-                  <img
-                    src="{% static 'assets/images/hero/inner-img/hero-1-1.png' %}"
-                    alt=""
-                  />
+                  <img src="{{i.image.url}}" alt="Hero Image" class="img-fluid" />
                 </div>
               </div>
             </div>
+        
           </div>
         </div>
+        
+        {% endfor %}
       </div>
       <!-- Single slider item -->
-      <div
+      <!-- <div
         class="hero-slide-item slider-height swiper-slide bg-color1"
         data-bg-image="{% static 'assets/images/hero/bg/hero-bg-1.webp' %}"
       >
@@ -90,7 +89,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <!-- Add Pagination -->
     <div class="swiper-pagination swiper-pagination-white"></div>

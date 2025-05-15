@@ -125,3 +125,5 @@ def forget_pass(request):
                 messages.error(request, "Passwords do not match.")      
                     
     return render(request, 'auth/forget_pass.html')
+
+

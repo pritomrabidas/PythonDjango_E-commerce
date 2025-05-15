@@ -1,8 +1,41 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-
+from .models import Slider
+from account.models import CustomUser
 @login_required(login_url='login')
 # @login_required(login_url='reg')
 
 def home(request):
-    return render(request, 'home/home.html')
+    sliders = Slider.objects.all()
+    return render(request, 'home/home.html', {'sli': sliders})
+
+@login_required(login_url='login')
+def update(request):
+    update = request.user
+    update = CustomUser.objects.all()
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        country = request.POST.get('country')
+        zipcode = request.POST.get('zipcode')
+        image = request.FILES.get('image')
+        if username:
+            update.username = username
+        
+        update.email = email
+        update.phone = phone
+        update.address = address
+        update.city = city
+        update.state = state
+        update.country = country
+        update.zipcode = zipcode
+        if image:
+            update.image = image
+        
+        update.save()
+        return redirect('home')
+    return render(request, 'home/my_account.html',{'update': update})

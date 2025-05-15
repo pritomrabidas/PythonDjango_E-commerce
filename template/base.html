@@ -186,7 +186,7 @@
                   <li><a href="about.html">About</a></li>
                   {% if request.user.is_authenticated %}
                   <li class="dropdown position-static">
-                    <a href="">myacount</a>
+                    <a href="{% url 'update' %}">My Account</a>
                   </li>
                   <li class="dropdown position-static">
                     <a href="{% url 'logout' %}">Logout</a>
