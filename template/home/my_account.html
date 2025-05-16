@@ -84,18 +84,6 @@
                 />
               </div>
 
-              <!-- Address -->
-              <div class="mb-3">
-                <label for="address" class="form-label">Address</label>
-                <textarea
-                  class="form-control"
-                  id="address"
-                  name="address"
-                  value="{{ update.address }}"
-                  rows="3"
-                ></textarea>
-              </div>
-
               <!-- City, State, Country, Zipcode -->
               <div class="row">
                 <div class="col-md-6 mb-3">
@@ -144,15 +132,17 @@
               <div class="mb-3">
                 <label for="image" class="form-label">Profile Image</label>
                 <input
-                  value="{{ update.image }}"
+                  value="{{ update.image.url }}"
                   class="form-control"
                   type="file"
                   id="image"
                   name="image"
                 />
                 <img
-                  src="/media/default.jpg"
+                
+                  src="{{update.image.url}}"
                   alt="Default Image"
+                  name="image"
                   class="img-thumbnail mt-2"
                   width="150"
                   id="imagePreview"

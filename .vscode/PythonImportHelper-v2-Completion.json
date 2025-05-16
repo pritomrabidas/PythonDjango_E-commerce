@@ -1037,7 +1037,7 @@
         "kind": 5,
         "importPath": "home.urls",
         "description": "home.urls",
-        "peekOfCode": "urlpatterns = [\n    path('', home, name='home'),\n    path('update', update, name='update'),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('', home, name='home'),\n    path('update/<int:id>', update, name='update'),\n]",
         "detail": "home.urls",
         "documentation": {}
     },
@@ -1046,7 +1046,7 @@
         "kind": 2,
         "importPath": "home.views",
         "description": "home.views",
-        "peekOfCode": "def home(request):\n    sliders = Slider.objects.all()\n    return render(request, 'home/home.html', {'sli': sliders})\n@login_required(login_url='login')\ndef update(request):\n    update = request.user\n    update = CustomUser.objects.all()\n    if request.method == 'POST':\n        username = request.POST.get('username')\n        email = request.POST.get('email')",
+        "peekOfCode": "def home(request):\n    sliders = Slider.objects.all()\n    return render(request, 'home/home.html', {'sli': sliders})\n@login_required(login_url='login')\ndef update(request,id):\n    update = request.user\n    User = CustomUser.objects.get(id=id)\n    if request.method == 'POST':\n        username = request.POST.get('username')\n        email = request.POST.get('email')",
         "detail": "home.views",
         "documentation": {}
     },
@@ -1055,7 +1055,7 @@
         "kind": 2,
         "importPath": "home.views",
         "description": "home.views",
-        "peekOfCode": "def update(request):\n    update = request.user\n    update = CustomUser.objects.all()\n    if request.method == 'POST':\n        username = request.POST.get('username')\n        email = request.POST.get('email')\n        phone = request.POST.get('phone')\n        address = request.POST.get('address')\n        city = request.POST.get('city')\n        state = request.POST.get('state')",
+        "peekOfCode": "def update(request,id):\n    update = request.user\n    User = CustomUser.objects.get(id=id)\n    if request.method == 'POST':\n        username = request.POST.get('username')\n        email = request.POST.get('email')\n        phone = request.POST.get('phone')\n        city = request.POST.get('city')\n        state = request.POST.get('state')\n        country = request.POST.get('country')",
         "detail": "home.views",
         "documentation": {}
     },

@@ -10,32 +10,30 @@ def home(request):
     return render(request, 'home/home.html', {'sli': sliders})
 
 @login_required(login_url='login')
-def update(request):
+def update(request,id):
     update = request.user
-    update = CustomUser.objects.all()
+    User = CustomUser.objects.get(id=id)
     if request.method == 'POST':
         username = request.POST.get('username')
         email = request.POST.get('email')
         phone = request.POST.get('phone')
-        address = request.POST.get('address')
         city = request.POST.get('city')
         state = request.POST.get('state')
         country = request.POST.get('country')
         zipcode = request.POST.get('zipcode')
         image = request.FILES.get('image')
         if username:
-            update.username = username
+            User.username = username
         
-        update.email = email
-        update.phone = phone
-        update.address = address
-        update.city = city
-        update.state = state
-        update.country = country
-        update.zipcode = zipcode
+        User.email = email
+        User.phone = phone
+        User.city = city
+        User.state = state
+        User.country = country
+        User.zipcode = zipcode
         if image:
-            update.image = image
+            User.image = image
         
-        update.save()
+        User.save()
         return redirect('home')
-    return render(request, 'home/my_account.html',{'update': update})
+    return render(request, 'home/my_account.html',{'update': User})
