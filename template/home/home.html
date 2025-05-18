@@ -21,34 +21,48 @@
         {% for i in sli %}
         <div class="container h-100">
           <div class="row h-100">
-        
             <!-- Text Content Section -->
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 d-flex align-items-center justify-content-center text-center text-md-start sm-center-view">
-              <div class="hero-slide-content slider-animated-1" style="color: black !important;">
-                <span class="category" style="color: black !important;">Welcome To Hmart</span>
-                <h2 class="title-1" style="color: black !important;">
+            <div
+              class="col-xl-6 col-lg-6 col-md-6 col-sm-12 d-flex align-items-center justify-content-center text-center text-md-start sm-center-view"
+            >
+              <div
+                class="hero-slide-content slider-animated-1"
+                style="color: black !important"
+              >
+                <span class="category" style="color: black !important"
+                  >Welcome To Hmart</span
+                >
+                <h2 class="title-1" style="color: black !important">
                   Your Home <br />
                   Smart Devices & <br />
                   Best Solution
                 </h2>
-                <a href="shop-left-sidebar.html" class="btn btn-primary text-capitalize">
+                <a
+                  href="shop-left-sidebar.html"
+                  class="btn btn-primary text-capitalize"
+                >
                   Shop All Devices
                 </a>
               </div>
             </div>
-        
+
             <!-- Image Section -->
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center align-items-end position-relative">
+            <div
+              class="col-xl-6 col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center align-items-end position-relative"
+            >
               <div class="show-case">
                 <div class="hero-slide-image">
-                  <img src="{{i.image.url}}" alt="Hero Image" class="img-fluid" />
+                  <img
+                    src="{{i.image.url}}"
+                    alt="Hero Image"
+                    class="img-fluid"
+                  />
                 </div>
               </div>
             </div>
-        
           </div>
         </div>
-        
+
         {% endfor %}
       </div>
       <!-- Single slider item -->
