@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Slider
-from account.models import CustomUser
+from .models import Slider,Product
 from django.core.mail import send_mail , BadHeaderError
 from django.conf import settings
 from django.contrib import messages
@@ -11,36 +10,11 @@ from django.contrib import messages
 
 def home(request):
     sliders = Slider.objects.all()
-    return render(request, 'home/home.html', {'sli': sliders})
+    new_arrival = Product.objects.filter(new_arrival=True)
+    top_rated = Product.objects.filter(top_rated=True)
+    featured = Product.objects.filter(featured=True)
+    return render(request, 'home/home.html', {'sli': sliders,'new_arrival': new_arrival, 'top_rated': top_rated, 'featured': featured})
 
-@login_required(login_url='login')
-def update(request,id):
-    update = request.user
-    User = CustomUser.objects.get(id=id)
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        city = request.POST.get('city')
-        state = request.POST.get('state')
-        country = request.POST.get('country')
-        zipcode = request.POST.get('zipcode')
-        image = request.FILES.get('image')
-        if username:
-            User.username = username
-        
-        User.email = email
-        User.phone = phone
-        User.city = city
-        User.state = state
-        User.country = country
-        User.zipcode = zipcode
-        if image:
-            User.image = image
-        
-        User.save()
-        return redirect('home')
-    return render(request, 'home/my_account.html',{'update': User})
 
 
 @login_required(login_url='login')
@@ -69,3 +43,8 @@ def contact(request):
 
         return redirect('contact')
     return render(request, 'home/contact.html')
+
+def shop(request):
+    products = Product.objects.all()
+    print(products) 
+    return render(request, 'home/shop.html', {'pro': products})

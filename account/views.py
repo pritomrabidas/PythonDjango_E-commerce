@@ -1,11 +1,13 @@
 from django.shortcuts import render , redirect ,HttpResponseRedirect
 from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
 from .models import CustomUser
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.conf import settings
 from django.contrib import messages
 import random
+
 def reg(request):
     if request.user.is_authenticated:
         messages.error(request, "You are already logged in.")
@@ -127,3 +129,31 @@ def forget_pass(request):
     return render(request, 'auth/forget_pass.html')
 
 
+@login_required(login_url='login')
+def update(request,id):
+    update = request.user
+    User = CustomUser.objects.get(id=id)
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        country = request.POST.get('country')
+        zipcode = request.POST.get('zipcode')
+        image = request.FILES.get('image')
+        if username:
+            User.username = username
+        
+        User.email = email
+        User.phone = phone
+        User.city = city
+        User.state = state
+        User.country = country
+        User.zipcode = zipcode
+        if image:
+            User.image = image
+        
+        User.save()
+        return redirect('home')
+    return render(request, 'home/my_account.html',{'update': User})

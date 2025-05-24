@@ -163,6 +163,38 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -339,6 +371,22 @@
         "documentation": {}
     },
     {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "static",
+        "importPath": "django.conf.urls.static",
+        "description": "django.conf.urls.static",
+        "isExtraImport": true,
+        "detail": "django.conf.urls.static",
+        "documentation": {}
+    },
+    {
         "label": "static",
         "importPath": "django.conf.urls.static",
         "description": "django.conf.urls.static",
@@ -403,15 +451,6 @@
         "documentation": {}
     },
     {
-        "label": "django.core.mail",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "django.core.mail",
-        "description": "django.core.mail",
-        "detail": "django.core.mail",
-        "documentation": {}
-    },
-    {
         "label": "send_mail",
         "importPath": "django.core.mail",
         "description": "django.core.mail",
@@ -433,6 +472,22 @@
         "description": "django.core.mail",
         "isExtraImport": true,
         "detail": "django.core.mail",
+        "documentation": {}
+    },
+    {
+        "label": "login_required",
+        "importPath": "django.contrib.auth.decorators",
+        "description": "django.contrib.auth.decorators",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.decorators",
+        "documentation": {}
+    },
+    {
+        "label": "login_required",
+        "importPath": "django.contrib.auth.decorators",
+        "description": "django.contrib.auth.decorators",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.decorators",
         "documentation": {}
     },
     {
@@ -517,38 +572,6 @@
         "importPath": "django.db.models.deletion",
         "description": "django.db.models.deletion",
         "detail": "django.db.models.deletion",
-        "documentation": {}
-    },
-    {
-        "label": "DEFAULT_AUTO_FIELD",
-        "importPath": "config.settings",
-        "description": "config.settings",
-        "isExtraImport": true,
-        "detail": "config.settings",
-        "documentation": {}
-    },
-    {
-        "label": "slugify",
-        "importPath": "django.utils.text",
-        "description": "django.utils.text",
-        "isExtraImport": true,
-        "detail": "django.utils.text",
-        "documentation": {}
-    },
-    {
-        "label": "login_required",
-        "importPath": "django.contrib.auth.decorators",
-        "description": "django.contrib.auth.decorators",
-        "isExtraImport": true,
-        "detail": "django.contrib.auth.decorators",
-        "documentation": {}
-    },
-    {
-        "label": "CustomUser",
-        "importPath": "account.models",
-        "description": "account.models",
-        "isExtraImport": true,
-        "detail": "account.models",
         "documentation": {}
     },
     {
@@ -637,7 +660,7 @@
         "kind": 5,
         "importPath": "account.urls",
         "description": "account.urls",
-        "peekOfCode": "urlpatterns = [\n    path('reg/', reg, name='reg'),\n    path('login/', login_user, name='login'),\n    path('verify_otp/', verify_otp, name='verify_otp'),\n    path('logout/', logout , name='logout'),\n    path('forget',forget ,name='forget'),\n    path('forget_otp',forget_otp ,name='forget_otp'),\n    path('forget_pass',forget_pass ,name='forget_pass'),\n]\nif settings.DEBUG:",
+        "peekOfCode": "urlpatterns = [\n    path('reg/', reg, name='reg'),\n    path('login/', login_user, name='login'),\n    path('verify_otp/', verify_otp, name='verify_otp'),\n    path('logout/', logout , name='logout'),\n    path('forget',forget ,name='forget'),\n    path('forget_otp',forget_otp ,name='forget_otp'),\n    path('forget_pass',forget_pass ,name='forget_pass'),\n    path('update/<int:id>', update, name='update'),\n]",
         "detail": "account.urls",
         "documentation": {}
     },
@@ -710,6 +733,15 @@
         "importPath": "account.views",
         "description": "account.views",
         "peekOfCode": "def forget_pass(request):\n    if request.method == 'POST':\n        pass1 = request.POST.get('pass1')\n        pass2 = request.POST.get('pass2')\n        user = CustomUser.objects.filter(is_verified=True).first()\n        if user:\n            if pass1 == pass2:\n                user.set_password(pass1)\n                user.save()\n                return redirect('home')",
+        "detail": "account.views",
+        "documentation": {}
+    },
+    {
+        "label": "update",
+        "kind": 2,
+        "importPath": "account.views",
+        "description": "account.views",
+        "peekOfCode": "def update(request,id):\n    update = request.user\n    User = CustomUser.objects.get(id=id)\n    if request.method == 'POST':\n        username = request.POST.get('username')\n        email = request.POST.get('email')\n        phone = request.POST.get('phone')\n        city = request.POST.get('city')\n        state = request.POST.get('state')\n        country = request.POST.get('country')",
         "detail": "account.views",
         "documentation": {}
     },
@@ -1038,6 +1070,24 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "home.migrations.0003_product_alter_review_product_delete_profile",
+        "description": "home.migrations.0003_product_alter_review_product_delete_profile",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('home', '0002_slider_remove_brand_slug_remove_size_slug'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Product',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),\n                ('name', models.CharField(max_length=100)),",
+        "detail": "home.migrations.0003_product_alter_review_product_delete_profile",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "home.migrations.0004_alter_product_ex_image1_alter_product_ex_image2_and_more",
+        "description": "home.migrations.0004_alter_product_ex_image1_alter_product_ex_image2_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('home', '0003_product_alter_review_product_delete_profile'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='product',\n            name='ex_image1',\n            field=models.ImageField(blank=True, default='default.jpg', null=True, upload_to='profile_images/'),\n        ),",
+        "detail": "home.migrations.0004_alter_product_ex_image1_alter_product_ex_image2_and_more",
+        "documentation": {}
+    },
+    {
         "label": "HomeConfig",
         "kind": 6,
         "importPath": "home.apps",
@@ -1051,7 +1101,7 @@
         "kind": 6,
         "importPath": "home.models",
         "description": "home.models",
-        "peekOfCode": "class Slider(models.Model):\n    image = models.ImageField(upload_to='slider_images/')\nclass Catagory(models.Model):\n    name = models.CharField(max_length=100)\n    slug = models.SlugField(max_length=100, unique=True)\n    def save(self, *args, **kwargs):\n        if not self.slug:\n            self.slug = slugify(self.name)\n        super().save(*args, **kwargs)\n    def __str__(self):",
+        "peekOfCode": "class Slider(models.Model):\n    image = models.ImageField(upload_to='slider_images/')\nclass Catagory(models.Model):\n    name = models.CharField(max_length=100)\n    def __str__(self):\n        return self.name\nclass Size(models.Model):\n    name = models.CharField(max_length=100)\n    # slug = models.SlugField(max_length=100, unique=True)\n    def __str__(self):",
         "detail": "home.models",
         "documentation": {}
     },
@@ -1060,7 +1110,7 @@
         "kind": 6,
         "importPath": "home.models",
         "description": "home.models",
-        "peekOfCode": "class Catagory(models.Model):\n    name = models.CharField(max_length=100)\n    slug = models.SlugField(max_length=100, unique=True)\n    def save(self, *args, **kwargs):\n        if not self.slug:\n            self.slug = slugify(self.name)\n        super().save(*args, **kwargs)\n    def __str__(self):\n        return self.name\nclass Size(models.Model):",
+        "peekOfCode": "class Catagory(models.Model):\n    name = models.CharField(max_length=100)\n    def __str__(self):\n        return self.name\nclass Size(models.Model):\n    name = models.CharField(max_length=100)\n    # slug = models.SlugField(max_length=100, unique=True)\n    def __str__(self):\n        return self.name\nclass Brand(models.Model):",
         "detail": "home.models",
         "documentation": {}
     },
@@ -1078,16 +1128,16 @@
         "kind": 6,
         "importPath": "home.models",
         "description": "home.models",
-        "peekOfCode": "class Brand(models.Model):\n    name = models.CharField(max_length=100)\n    # slug = models.SlugField(max_length=100, unique=True)\n    def __str__(self):\n        return self.name\nclass Profile(models.Model):\n    name = models.CharField(max_length=100)\n    description = models.TextField()\n    sku = models.CharField(max_length=100, unique=True)\n    tags = models.CharField(max_length=100)",
+        "peekOfCode": "class Brand(models.Model):\n    name = models.CharField(max_length=100)\n    # slug = models.SlugField(max_length=100, unique=True)\n    def __str__(self):\n        return self.name\nclass Product(models.Model):\n    name = models.CharField(max_length=100)\n    description = models.TextField()\n    sku = models.CharField(max_length=100, unique=True)\n    tags = models.CharField(max_length=100)",
         "detail": "home.models",
         "documentation": {}
     },
     {
-        "label": "Profile",
+        "label": "Product",
         "kind": 6,
         "importPath": "home.models",
         "description": "home.models",
-        "peekOfCode": "class Profile(models.Model):\n    name = models.CharField(max_length=100)\n    description = models.TextField()\n    sku = models.CharField(max_length=100, unique=True)\n    tags = models.CharField(max_length=100)\n    price = models.DecimalField(max_digits=10, decimal_places=2)\n    image = models.ImageField(upload_to='profile_images/', default='profile_images/default.jpg' , null=True,)\n    ex_image1 = models.ImageField(upload_to='profile_images/', default='default.jpg' , null=True,)\n    ex_image2 = models.ImageField(upload_to='profile_images/', default='default.jpg' , null=True,)\n    ex_image3 = models.ImageField(upload_to='profile_images/', default='default.jpg' , null=True,)",
+        "peekOfCode": "class Product(models.Model):\n    name = models.CharField(max_length=100)\n    description = models.TextField()\n    sku = models.CharField(max_length=100, unique=True)\n    tags = models.CharField(max_length=100)\n    price = models.DecimalField(max_digits=10, decimal_places=2)\n    image = models.ImageField(upload_to='profile_images/',default='default.jpg',null=True,blank=True)\n    ex_image1 = models.ImageField(upload_to='profile_images/',default='default.jpg',null=True,blank=True)\n    ex_image2 = models.ImageField(upload_to='profile_images/',default='default.jpg',null=True,blank=True)\n    ex_image3 = models.ImageField(upload_to='profile_images/',default='default.jpg',null=True,blank=True)",
         "detail": "home.models",
         "documentation": {}
     },
@@ -1096,7 +1146,7 @@
         "kind": 6,
         "importPath": "home.models",
         "description": "home.models",
-        "peekOfCode": "class Review(models.Model):\n    product = models.ForeignKey(Profile, on_delete=models.CASCADE)\n    user = models.CharField(max_length=100)\n    email = models.EmailField()\n    comment = models.TextField()\n    rating = models.IntegerField()\n    def _str_(self):\n        return f\"{self.user} - {self.product.name} - {self.rating}\"",
+        "peekOfCode": "class Review(models.Model):\n    product = models.ForeignKey(Product, on_delete=models.CASCADE)\n    user = models.CharField(max_length=100)\n    email = models.EmailField()\n    comment = models.TextField()\n    rating = models.IntegerField()\n    def _str_(self):\n        return f\"{self.user} - {self.product.name} - {self.rating}\"",
         "detail": "home.models",
         "documentation": {}
     },
@@ -1105,7 +1155,7 @@
         "kind": 5,
         "importPath": "home.urls",
         "description": "home.urls",
-        "peekOfCode": "urlpatterns = [\n    path('', home, name='home'),\n    path('update/<int:id>', update, name='update'),\n    path('contact/', contact, name='contact'),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('', home, name='home'),\n    path('contact/', contact, name='contact'),\n    path('shop/', shop, name='shop'),\n]\nif settings.DEBUG:\n    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\n    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)",
         "detail": "home.urls",
         "documentation": {}
     },
@@ -1114,16 +1164,7 @@
         "kind": 2,
         "importPath": "home.views",
         "description": "home.views",
-        "peekOfCode": "def home(request):\n    sliders = Slider.objects.all()\n    return render(request, 'home/home.html', {'sli': sliders})\n@login_required(login_url='login')\ndef update(request,id):\n    update = request.user\n    User = CustomUser.objects.get(id=id)\n    if request.method == 'POST':\n        username = request.POST.get('username')\n        email = request.POST.get('email')",
-        "detail": "home.views",
-        "documentation": {}
-    },
-    {
-        "label": "update",
-        "kind": 2,
-        "importPath": "home.views",
-        "description": "home.views",
-        "peekOfCode": "def update(request,id):\n    update = request.user\n    User = CustomUser.objects.get(id=id)\n    if request.method == 'POST':\n        username = request.POST.get('username')\n        email = request.POST.get('email')\n        phone = request.POST.get('phone')\n        city = request.POST.get('city')\n        state = request.POST.get('state')\n        country = request.POST.get('country')",
+        "peekOfCode": "def home(request):\n    sliders = Slider.objects.all()\n    new_arrival = Product.objects.filter(new_arrival=True)\n    top_rated = Product.objects.filter(top_rated=True)\n    featured = Product.objects.filter(featured=True)\n    return render(request, 'home/home.html', {'sli': sliders,'new_arrival': new_arrival, 'top_rated': top_rated, 'featured': featured})\n@login_required(login_url='login')\ndef contact(request):\n    if request.method == \"POST\":\n        name = request.POST.get('name')",
         "detail": "home.views",
         "documentation": {}
     },
@@ -1133,6 +1174,15 @@
         "importPath": "home.views",
         "description": "home.views",
         "peekOfCode": "def contact(request):\n    if request.method == \"POST\":\n        name = request.POST.get('name')\n        email = request.POST.get('email')\n        subject = request.POST.get('subject')\n        message = request.POST.get('message')\n        full_message = f\"Message from {name} <{email}>:\\n\\n{message}\"\n        try:\n            send_mail(\n                subject=subject,",
+        "detail": "home.views",
+        "documentation": {}
+    },
+    {
+        "label": "shop",
+        "kind": 2,
+        "importPath": "home.views",
+        "description": "home.views",
+        "peekOfCode": "def shop(request):\n    products = Product.objects.all()\n    print(products) \n    return render(request, 'home/shop.html', {'pro': products})",
         "detail": "home.views",
         "documentation": {}
     },

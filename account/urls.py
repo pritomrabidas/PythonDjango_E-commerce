@@ -11,6 +11,7 @@ urlpatterns = [
     path('forget',forget ,name='forget'),
     path('forget_otp',forget_otp ,name='forget_otp'),
     path('forget_pass',forget_pass ,name='forget_pass'),
+    path('update/<int:id>', update, name='update'),
     
 ]
 
