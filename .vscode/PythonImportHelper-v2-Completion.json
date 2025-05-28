@@ -840,7 +840,16 @@
         "kind": 5,
         "importPath": "config.settings",
         "description": "config.settings",
-        "peekOfCode": "WSGI_APPLICATION = 'config.wsgi.application'\n# Database\n# https://docs.djangoproject.com/en/5.2/ref/settings/#databases\nDATABASES = {\n  'default': {\n    'ENGINE': 'django.db.backends.postgresql',\n    'NAME': 'neondb',\n    'USER': 'neondb_owner',\n    'PASSWORD': 'npg_Kjd73VtxFkZf',\n    'HOST': 'ep-hidden-dawn-a1hh46up-pooler.ap-southeast-1.aws.neon.tech',",
+        "peekOfCode": "WSGI_APPLICATION = 'config.wsgi.application'\n# Database\n# https://docs.djangoproject.com/en/5.2/ref/settings/#databases\nDATABASES = {\n    'default': dj_database_url.config(default='sqlite:///db.sqlite3')\n}\nDATABASES = {\n  'default': {\n    'ENGINE': 'django.db.backends.postgresql',\n    'NAME': 'neondb',",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASES",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "DATABASES = {\n    'default': dj_database_url.config(default='sqlite:///db.sqlite3')\n}\nDATABASES = {\n  'default': {\n    'ENGINE': 'django.db.backends.postgresql',\n    'NAME': 'neondb',\n    'USER': 'neondb_owner',\n    'PASSWORD': 'npg_Kjd73VtxFkZf',\n    'HOST': 'ep-hidden-dawn-a1hh46up-pooler.ap-southeast-1.aws.neon.tech',",
         "detail": "config.settings",
         "documentation": {}
     },
@@ -1101,7 +1110,7 @@
         "kind": 6,
         "importPath": "home.models",
         "description": "home.models",
-        "peekOfCode": "class Slider(models.Model):\n    image = models.ImageField(upload_to='slider_images/')\nclass Catagory(models.Model):\n    name = models.CharField(max_length=100)\n    def __str__(self):\n        return self.name\nclass Size(models.Model):\n    name = models.CharField(max_length=100)\n    # slug = models.SlugField(max_length=100, unique=True)\n    def __str__(self):",
+        "peekOfCode": "class Slider(models.Model):\n    image = models.ImageField(upload_to='slider_images/')\nclass Catagory(models.Model):\n    name = models.CharField(max_length=100)\n    slug = models.SlugField(max_length=100, unique=True)\n    def __str__(self):\n        return self.name\nclass Size(models.Model):\n    name = models.CharField(max_length=100)\n    # slug = models.SlugField(max_length=100, unique=True)",
         "detail": "home.models",
         "documentation": {}
     },
@@ -1110,7 +1119,7 @@
         "kind": 6,
         "importPath": "home.models",
         "description": "home.models",
-        "peekOfCode": "class Catagory(models.Model):\n    name = models.CharField(max_length=100)\n    def __str__(self):\n        return self.name\nclass Size(models.Model):\n    name = models.CharField(max_length=100)\n    # slug = models.SlugField(max_length=100, unique=True)\n    def __str__(self):\n        return self.name\nclass Brand(models.Model):",
+        "peekOfCode": "class Catagory(models.Model):\n    name = models.CharField(max_length=100)\n    slug = models.SlugField(max_length=100, unique=True)\n    def __str__(self):\n        return self.name\nclass Size(models.Model):\n    name = models.CharField(max_length=100)\n    # slug = models.SlugField(max_length=100, unique=True)\n    def __str__(self):\n        return self.name",
         "detail": "home.models",
         "documentation": {}
     },

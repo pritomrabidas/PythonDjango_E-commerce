@@ -404,7 +404,7 @@
               <div class="tab-content">
                 <div class="tab-pane fade show active" id="shop-grid">
                   <div class="row mb-n-30px">
-                    <!-- {% for product in pro %} -->
+                    {% for product in pro %}
                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-30px">
                       <!-- Single Prodect -->
                       <div class="product">
@@ -414,12 +414,12 @@
                         <div class="thumb">
                           <a href="single-product.html" class="image">
                             <img
-                              src="assets/images/product-image/1.webp"
+                              src="{{product.image.url}}"
                               alt="Product"
                             />
                             <img
                               class="hover-image"
-                              src="assets/images/product-image/1.webp"
+                              src="{{product.ex_image1.url}}"
                               alt="Product"
                             />
                           </a>
@@ -474,7 +474,7 @@
                         </div>
                       </div>
                     </div>
-                    <!-- {% endfor %} -->
+                    {% endfor %}
                   </div>
                 </div>
               </div>

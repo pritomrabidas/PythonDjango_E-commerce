@@ -283,6 +283,7 @@
           {% endfor %}
           <!-- 1st tab end -->
           <!-- 2nd tab start -->
+           {% for product in top_rated %}
           <div class="tab-pane fade" id="toprated">
             <div class="row">
               <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
@@ -294,12 +295,12 @@
                   <div class="thumb">
                     <a href="single-product.html" class="image">
                       <img
-                        src="{% static 'assets/images/product-image/1.webp' %}"
+                        src="{{product.image.url}}"
                         alt="Product"
                       />
                       <img
                         class="hover-image"
-                        src="{% static 'assets/images/product-image/1.webp' %}"
+                        src="{{product.ex_image1.url}}"
                         alt="Product"
                       />
                     </a>
@@ -352,8 +353,10 @@
               </div>
             </div>
           </div>
+          {% endfor %}
           <!-- 2nd tab end -->
           <!-- 3rd tab start -->
+           {% for product in featured %}
           <div class="tab-pane fade" id="featured">
             <div class="row">
               <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
@@ -365,12 +368,12 @@
                   <div class="thumb">
                     <a href="single-product.html" class="image">
                       <img
-                        src="{% static 'assets/images/product-image/1.webp' %}"
+                        src="{{product.image.url}}"
                         alt="Product"
                       />
                       <img
                         class="hover-image"
-                        src="{% static 'assets/images/product-image/1.webp' %}"
+                        src="{{product.ex_image2.url}}"
                         alt="Product"
                       />
                     </a>
@@ -423,6 +426,7 @@
               </div>
             </div>
           </div>
+          {% endfor %}
           <!-- 3rd tab end -->
         </div>
       </div>
