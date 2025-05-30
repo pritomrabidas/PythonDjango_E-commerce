@@ -413,10 +413,7 @@
                         </span>
                         <div class="thumb">
                           <a href="single-product.html" class="image">
-                            <img
-                              src="{{product.image.url}}"
-                              alt="Product"
-                            />
+                            <img src="{{product.image.url}}" alt="Product" />
                             <img
                               class="hover-image"
                               src="{{product.ex_image1.url}}"
@@ -438,14 +435,16 @@
                           </span>
                         </div>
                         <div class="actions">
-                          <button
-                            title="Add To Cart"
-                            class="action add-to-cart"
-                            data-bs-toggle="modal"
-                            data-bs-target="#exampleModal-Cart"
-                          >
-                            <i class="pe-7s-shopbag"></i>
-                          </button>
+                          <a href="{% url 'singleProduct' product.id %}">
+                            <button
+                              title="Add To Cart"
+                              class="action add-to-cart"
+                              data-bs-toggle="modal"
+                              data-bs-target="#exampleModal-Cart"
+                            >
+                              <i class="pe-7s-shopbag"></i>
+                            </button>
+                          </a>
                           <button
                             class="action wishlist"
                             title="Wishlist"

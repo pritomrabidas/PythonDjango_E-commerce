@@ -48,3 +48,7 @@ def shop(request):
     products = Product.objects.all()
     print(products) 
     return render(request, 'home/shop.html', {'pro': products})
+
+def singleProduct(request,id):
+    product = Product.objects.get(id=id)
+    return render(request, 'home/singleProduct.html', {'pro': product})

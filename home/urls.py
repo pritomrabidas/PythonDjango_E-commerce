@@ -7,6 +7,7 @@ urlpatterns = [
     path('', home, name='home'),
     path('contact/', contact, name='contact'),
     path('shop/', shop, name='shop'),
+    path('singleProduct/<int:id>/', singleProduct, name='singleProduct'),
 ]
 
 if settings.DEBUG:
