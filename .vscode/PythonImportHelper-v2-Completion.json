@@ -1164,7 +1164,7 @@
         "kind": 5,
         "importPath": "home.urls",
         "description": "home.urls",
-        "peekOfCode": "urlpatterns = [\n    path('', home, name='home'),\n    path('contact/', contact, name='contact'),\n    path('shop/', shop, name='shop'),\n    path('singleProduct/<int:id>/', singleProduct, name='singleProduct'),\n]\nif settings.DEBUG:\n    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\n    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)",
+        "peekOfCode": "urlpatterns = [\n    path('', home, name='home'),\n    path('contact/', contact, name='contact'),\n    path('shop/', shop, name='shop'),\n    path('singleProduct/<int:id>/', singleProduct, name='singleProduct'),\n    path('checkout/<int:id>/', checkout, name='checkout'),\n]\nif settings.DEBUG:\n    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\n    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)",
         "detail": "home.urls",
         "documentation": {}
     },
@@ -1191,7 +1191,7 @@
         "kind": 2,
         "importPath": "home.views",
         "description": "home.views",
-        "peekOfCode": "def shop(request):\n    products = Product.objects.all()\n    print(products) \n    return render(request, 'home/shop.html', {'pro': products})\ndef singleProduct(request,id):\n    product = Product.objects.get(id=id)\n    return render(request, 'home/singleProduct.html', {'pro': product})",
+        "peekOfCode": "def shop(request):\n    products = Product.objects.all()\n    print(products) \n    return render(request, 'home/shop.html', {'pro': products})\ndef singleProduct(request,id):\n    product = Product.objects.get(id=id)\n    return render(request, 'home/singleProduct.html', {'pro': product})\ndef checkout(request,id):\n    product = Product.objects.get(id=id)\n    return render(request, 'home/checkout.html',{'pro': product})",
         "detail": "home.views",
         "documentation": {}
     },
@@ -1200,7 +1200,16 @@
         "kind": 2,
         "importPath": "home.views",
         "description": "home.views",
-        "peekOfCode": "def singleProduct(request,id):\n    product = Product.objects.get(id=id)\n    return render(request, 'home/singleProduct.html', {'pro': product})",
+        "peekOfCode": "def singleProduct(request,id):\n    product = Product.objects.get(id=id)\n    return render(request, 'home/singleProduct.html', {'pro': product})\ndef checkout(request,id):\n    product = Product.objects.get(id=id)\n    return render(request, 'home/checkout.html',{'pro': product})",
+        "detail": "home.views",
+        "documentation": {}
+    },
+    {
+        "label": "checkout",
+        "kind": 2,
+        "importPath": "home.views",
+        "description": "home.views",
+        "peekOfCode": "def checkout(request,id):\n    product = Product.objects.get(id=id)\n    return render(request, 'home/checkout.html',{'pro': product})",
         "detail": "home.views",
         "documentation": {}
     },

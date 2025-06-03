@@ -52,3 +52,7 @@ def shop(request):
 def singleProduct(request,id):
     product = Product.objects.get(id=id)
     return render(request, 'home/singleProduct.html', {'pro': product})
+
+def checkout(request,id):
+    product = Product.objects.get(id=id)
+    return render(request, 'home/checkout.html',{'pro': product})

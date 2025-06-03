@@ -92,7 +92,7 @@
         <a href="cart.html" class="btn btn-dark btn-hover-primary mb-30px"
           >view cart</a
         >
-        <a href="checkout.html" class="btn btn-outline-dark current-btn"
+        <a href="{% url 'checkout' pro.id %}" class="btn btn-outline-dark current-btn"
           >checkout</a
         >
       </div>
@@ -346,14 +346,6 @@
                 class="img-responsive m-auto"
                 src="{{pro.ex_image3.url}}"
                 alt="{{pro.name}}"
-              />
-              
-            </div>
-            <div class="swiper-slide">
-              <img
-                class="img-responsive m-auto"
-                src="{{prod.ex_image4.url}}"
-                alt=""
               />
               
             </div>
