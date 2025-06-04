@@ -1097,6 +1097,15 @@
         "documentation": {}
     },
     {
+        "label": "SearchProduct",
+        "kind": 6,
+        "importPath": "home.admin",
+        "description": "home.admin",
+        "peekOfCode": "class SearchProduct(admin.ModelAdmin):\n    list_display = [\"name\", \"price\", \"brand\",\"best_selling\",\"discount\",]\n    search_fields = [\"name\", \"price\", \"brand\",\"best_selling\",\"discount\",]\nadmin.site.register(Slider)\nadmin.site.register(Catagory)\nadmin.site.register(Size)\nadmin.site.register(Brand)\nadmin.site.register(Product,SearchProduct)\nadmin.site.register(Review)\n# Register your models here.",
+        "detail": "home.admin",
+        "documentation": {}
+    },
+    {
         "label": "HomeConfig",
         "kind": 6,
         "importPath": "home.apps",
