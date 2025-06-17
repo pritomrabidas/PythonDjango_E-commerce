@@ -10,5 +10,5 @@ admin.site.register(Size)
 admin.site.register(Brand)
 admin.site.register(Product,SearchProduct)
 admin.site.register(Review)
-
+admin.site.register(Cart)
 # Register your models here.

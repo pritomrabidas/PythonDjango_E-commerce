@@ -73,14 +73,13 @@
       <ul class="minicart-product-list">
         <li>
           <a href="single-product.html" class="image"
-            ><img
-              src="{{pro.image.url}}"
-              alt="Cart product Image"
+            ><img src="{{pro.image.url}}" alt="Cart product Image"
           /></a>
           <div class="content">
             <a href="single-product.html" class="title">{{pro.name}}</a>
             <span class="quantity-price"
-              >{{pro.quantity}} x <span class="amount">${{pro.price}}</span></span
+              >{{pro.quantity}} x
+              <span class="amount">${{pro.price}}</span></span
             >
             <a href="#" class="remove">×</a>
           </div>
@@ -92,7 +91,7 @@
         <a href="cart.html" class="btn btn-dark btn-hover-primary mb-30px"
           >view cart</a
         >
-        <a href="{% url 'checkout' pro.id %}" class="btn btn-outline-dark current-btn"
+        <a href="{% url 'checkout' %}" class="btn btn-outline-dark current-btn"
           >checkout</a
         >
       </div>
@@ -347,7 +346,6 @@
                 src="{{pro.ex_image3.url}}"
                 alt="{{pro.name}}"
               />
-              
             </div>
           </div>
         </div>
@@ -422,9 +420,7 @@
               ><a class="reviews" href="#">(5 Customer Review)</a></span
             >
           </div>
-          <p class="mt-30px">
-            {{pro.description}}
-          </p>
+          <p class="mt-30px">{{pro.description}}</p>
           <div
             class="pro-details-categories-info pro-details-same-style d-flex m-0"
           >
@@ -470,9 +466,11 @@
                 value="{{pro.quantity}}"
               />
             </div>
-            <div class="pro-details-cart">
-              <button class="add-cart">Add To Cart</button>
-            </div>
+            {% if pro.id %}
+            <a href="{% url 'add_to_cart' pro.id %}">Add to Cart</a>
+            {% else %}
+            <p>Product ID missing or invalid</p>
+            {% endif %}
             <div class="pro-details-compare-wishlist pro-details-wishlist">
               <a href="wishlist.html"><i class="pe-7s-like"></i></a>
             </div>

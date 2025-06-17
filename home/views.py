@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Slider,Product
+from .models import Slider,Product,Cart
 from django.core.mail import send_mail , BadHeaderError
 from django.conf import settings
 from django.contrib import messages
@@ -14,8 +14,6 @@ def home(request):
     top_rated = Product.objects.filter(top_rated=True)
     featured = Product.objects.filter(featured=True)
     return render(request, 'home/home.html', {'sli': sliders,'new_arrival': new_arrival, 'top_rated': top_rated, 'featured': featured})
-
-
 
 @login_required(login_url='login')
 def contact(request):
@@ -46,13 +44,22 @@ def contact(request):
 
 def shop(request):
     products = Product.objects.all()
-    print(products) 
     return render(request, 'home/shop.html', {'pro': products})
 
 def singleProduct(request,id):
     product = Product.objects.get(id=id)
     return render(request, 'home/singleProduct.html', {'pro': product})
 
-def checkout(request,id):
-    product = Product.objects.get(id=id)
-    return render(request, 'home/checkout.html',{'pro': product})
+def add_to_cart(request, product_id):
+    product = Product.objects.get(id=product_id)
+    try:
+        cart = Cart.objects.get(product=product, user=request.user.username)
+        cart.quantity += 1
+        cart.save()
+    except Cart.DoesNotExist:
+        Cart.objects.create(product=product, user=request.user.username, quantity=1)
+        
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+def checkout(request):
+    return render(request, 'home/checkout.html')

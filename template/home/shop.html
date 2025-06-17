@@ -434,17 +434,21 @@
                             <span class="new">$38.50</span>
                           </span>
                         </div>
+
                         <div class="actions">
-                          <a href="{% url 'singleProduct' product.id %}">
-                            <button
+                          {% for p in pro %} {% if p.id %}
+                          <a href="{% url 'singleProduct' p.id %}" class="btn"
+                            ><button
                               title="Add To Cart"
                               class="action add-to-cart"
                               data-bs-toggle="modal"
                               data-bs-target="#exampleModal-Cart"
                             >
-                              <i class="pe-7s-shopbag"></i>
-                            </button>
-                          </a>
+                              <i class="pe-7s-shopbag"></i></button
+                          ></a>
+                          {% else %}
+                          <p>Error: Product ID missing</p>
+                          {% endif %} {% endfor %}
                           <button
                             class="action wishlist"
                             title="Wishlist"

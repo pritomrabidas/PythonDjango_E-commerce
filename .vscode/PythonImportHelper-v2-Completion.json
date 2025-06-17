@@ -195,6 +195,14 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -251,14 +259,6 @@
         "documentation": {}
     },
     {
-        "label": "admin",
-        "importPath": "django.contrib",
-        "description": "django.contrib",
-        "isExtraImport": true,
-        "detail": "django.contrib",
-        "documentation": {}
-    },
-    {
         "label": "AppConfig",
         "importPath": "django.apps",
         "description": "django.apps",
@@ -272,22 +272,6 @@
         "description": "django.apps",
         "isExtraImport": true,
         "detail": "django.apps",
-        "documentation": {}
-    },
-    {
-        "label": "AppConfig",
-        "importPath": "django.apps",
-        "description": "django.apps",
-        "isExtraImport": true,
-        "detail": "django.apps",
-        "documentation": {}
-    },
-    {
-        "label": "TestCase",
-        "importPath": "django.test",
-        "description": "django.test",
-        "isExtraImport": true,
-        "detail": "django.test",
         "documentation": {}
     },
     {
@@ -436,14 +420,6 @@
     },
     {
         "label": "redirect",
-        "importPath": "django.shortcuts",
-        "description": "django.shortcuts",
-        "isExtraImport": true,
-        "detail": "django.shortcuts",
-        "documentation": {}
-    },
-    {
-        "label": "render",
         "importPath": "django.shortcuts",
         "description": "django.shortcuts",
         "isExtraImport": true,
@@ -1097,11 +1073,20 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "home.migrations.0005_cart",
+        "description": "home.migrations.0005_cart",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('home', '0004_alter_product_ex_image1_alter_product_ex_image2_and_more'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Cart',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),\n                ('user', models.CharField(max_length=100)),",
+        "detail": "home.migrations.0005_cart",
+        "documentation": {}
+    },
+    {
         "label": "SearchProduct",
         "kind": 6,
         "importPath": "home.admin",
         "description": "home.admin",
-        "peekOfCode": "class SearchProduct(admin.ModelAdmin):\n    list_display = [\"name\", \"price\", \"brand\",\"best_selling\",\"discount\",]\n    search_fields = [\"name\", \"price\", \"brand\",\"best_selling\",\"discount\",]\nadmin.site.register(Slider)\nadmin.site.register(Catagory)\nadmin.site.register(Size)\nadmin.site.register(Brand)\nadmin.site.register(Product,SearchProduct)\nadmin.site.register(Review)\n# Register your models here.",
+        "peekOfCode": "class SearchProduct(admin.ModelAdmin):\n    list_display = [\"name\", \"price\", \"brand\",\"best_selling\",\"discount\",]\n    search_fields = [\"name\", \"price\", \"brand\",\"best_selling\",\"discount\",]\nadmin.site.register(Slider)\nadmin.site.register(Catagory)\nadmin.site.register(Size)\nadmin.site.register(Brand)\nadmin.site.register(Product,SearchProduct)\nadmin.site.register(Review)\nadmin.site.register(Cart)",
         "detail": "home.admin",
         "documentation": {}
     },
@@ -1160,6 +1145,15 @@
         "documentation": {}
     },
     {
+        "label": "Car",
+        "kind": 6,
+        "importPath": "home.models",
+        "description": "home.models",
+        "peekOfCode": "class Cart (models.Model):\n    product = models.ForeignKey(Product, on_delete=models.CASCADE)\n    user = models.CharField(max_length=100)\n    quantity = models.IntegerField(default=1)\n    created_at = models.DateTimeField(auto_now_add=True)\nclass Review(models.Model):\n    product = models.ForeignKey(Product, on_delete=models.CASCADE)\n    user = models.CharField(max_length=100)\n    email = models.EmailField()\n    comment = models.TextField()",
+        "detail": "home.models",
+        "documentation": {}
+    },
+    {
         "label": "Review",
         "kind": 6,
         "importPath": "home.models",
@@ -1173,7 +1167,7 @@
         "kind": 5,
         "importPath": "home.urls",
         "description": "home.urls",
-        "peekOfCode": "urlpatterns = [\n    path('', home, name='home'),\n    path('contact/', contact, name='contact'),\n    path('shop/', shop, name='shop'),\n    path('singleProduct/<int:id>/', singleProduct, name='singleProduct'),\n    path('checkout/<int:id>/', checkout, name='checkout'),\n]\nif settings.DEBUG:\n    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\n    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)",
+        "peekOfCode": "urlpatterns = [\n    path('', home, name='home'),\n    path('contact/', contact, name='contact'),\n    path('shop/', shop, name='shop'),\n    path('singleProduct/<int:id>/', singleProduct, name='singleProduct'),\n    path('add_to_cart/<int:product_id>/',add_to_cart, name=\"add_to_cart\"),\n    path('checkout', checkout, name='checkout'),\n]\nif settings.DEBUG:\n    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)",
         "detail": "home.urls",
         "documentation": {}
     },
@@ -1200,7 +1194,7 @@
         "kind": 2,
         "importPath": "home.views",
         "description": "home.views",
-        "peekOfCode": "def shop(request):\n    products = Product.objects.all()\n    print(products) \n    return render(request, 'home/shop.html', {'pro': products})\ndef singleProduct(request,id):\n    product = Product.objects.get(id=id)\n    return render(request, 'home/singleProduct.html', {'pro': product})\ndef checkout(request,id):\n    product = Product.objects.get(id=id)\n    return render(request, 'home/checkout.html',{'pro': product})",
+        "peekOfCode": "def shop(request):\n    products = Product.objects.all()\n    return render(request, 'home/shop.html', {'pro': products})\ndef singleProduct(request,id):\n    product = Product.objects.get(id=id)\n    return render(request, 'home/singleProduct.html', {'pro': product})\ndef add_to_cart(request, product_id):\n    product = Product.objects.get(id=product_id)\n    try:\n        cart = Cart.objects.get(product=product, user=request.user.username)",
         "detail": "home.views",
         "documentation": {}
     },
@@ -1209,7 +1203,16 @@
         "kind": 2,
         "importPath": "home.views",
         "description": "home.views",
-        "peekOfCode": "def singleProduct(request,id):\n    product = Product.objects.get(id=id)\n    return render(request, 'home/singleProduct.html', {'pro': product})\ndef checkout(request,id):\n    product = Product.objects.get(id=id)\n    return render(request, 'home/checkout.html',{'pro': product})",
+        "peekOfCode": "def singleProduct(request,id):\n    product = Product.objects.get(id=id)\n    return render(request, 'home/singleProduct.html', {'pro': product})\ndef add_to_cart(request, product_id):\n    product = Product.objects.get(id=product_id)\n    try:\n        cart = Cart.objects.get(product=product, user=request.user.username)\n        cart.quantity += 1\n        cart.save()\n    except Cart.DoesNotExist:",
+        "detail": "home.views",
+        "documentation": {}
+    },
+    {
+        "label": "add_to_cart",
+        "kind": 2,
+        "importPath": "home.views",
+        "description": "home.views",
+        "peekOfCode": "def add_to_cart(request, product_id):\n    product = Product.objects.get(id=product_id)\n    try:\n        cart = Cart.objects.get(product=product, user=request.user.username)\n        cart.quantity += 1\n        cart.save()\n    except Cart.DoesNotExist:\n        Cart.objects.create(product=product, user=request.user.username, quantity=1)\n    return redirect(request.META.get('HTTP_REFERER', '/'))\ndef checkout(request):",
         "detail": "home.views",
         "documentation": {}
     },
@@ -1218,17 +1221,8 @@
         "kind": 2,
         "importPath": "home.views",
         "description": "home.views",
-        "peekOfCode": "def checkout(request,id):\n    product = Product.objects.get(id=id)\n    return render(request, 'home/checkout.html',{'pro': product})",
+        "peekOfCode": "def checkout(request):\n    return render(request, 'home/checkout.html')",
         "detail": "home.views",
-        "documentation": {}
-    },
-    {
-        "label": "ProductConfig",
-        "kind": 6,
-        "importPath": "product.apps",
-        "description": "product.apps",
-        "peekOfCode": "class ProductConfig(AppConfig):\n    default_auto_field = 'django.db.models.BigAutoField'\n    name = 'product'",
-        "detail": "product.apps",
         "documentation": {}
     },
     {
