@@ -436,8 +436,7 @@
                         </div>
 
                         <div class="actions">
-                          {% for p in pro %} {% if p.id %}
-                          <a href="{% url 'singleProduct' p.id %}" class="btn"
+                          <a href="{% url 'singleProduct' product.id %}" class="btn"
                             ><button
                               title="Add To Cart"
                               class="action add-to-cart"
@@ -446,9 +445,6 @@
                             >
                               <i class="pe-7s-shopbag"></i></button
                           ></a>
-                          {% else %}
-                          <p>Error: Product ID missing</p>
-                          {% endif %} {% endfor %}
                           <button
                             class="action wishlist"
                             title="Wishlist"

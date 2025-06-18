@@ -211,6 +211,22 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -320,6 +336,14 @@
         "description": "django.urls",
         "isExtraImport": true,
         "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
         "documentation": {}
     },
     {
@@ -1082,6 +1106,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "home.migrations.0006_alter_cart_user",
+        "description": "home.migrations.0006_alter_cart_user",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('home', '0005_cart'),\n        migrations.swappable_dependency(settings.AUTH_USER_MODEL),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='cart',\n            name='user',\n            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),",
+        "detail": "home.migrations.0006_alter_cart_user",
+        "documentation": {}
+    },
+    {
         "label": "SearchProduct",
         "kind": 6,
         "importPath": "home.admin",
@@ -1097,6 +1130,15 @@
         "description": "home.apps",
         "peekOfCode": "class HomeConfig(AppConfig):\n    default_auto_field = 'django.db.models.BigAutoField'\n    name = 'home'",
         "detail": "home.apps",
+        "documentation": {}
+    },
+    {
+        "label": "cart_items_processor",
+        "kind": 2,
+        "importPath": "home.context_processors",
+        "description": "home.context_processors",
+        "peekOfCode": "def cart_items_processor(request):\n    cart_items = Cart.objects.filter(user=request.user.username)\n    total_price = sum(item.product.price * item.quantity for item in cart_items)\n    return {'cart_items': cart_items, 'total_price': total_price}",
+        "detail": "home.context_processors",
         "documentation": {}
     },
     {
@@ -1194,7 +1236,7 @@
         "kind": 2,
         "importPath": "home.views",
         "description": "home.views",
-        "peekOfCode": "def shop(request):\n    products = Product.objects.all()\n    return render(request, 'home/shop.html', {'pro': products})\ndef singleProduct(request,id):\n    product = Product.objects.get(id=id)\n    return render(request, 'home/singleProduct.html', {'pro': product})\ndef add_to_cart(request, product_id):\n    product = Product.objects.get(id=product_id)\n    try:\n        cart = Cart.objects.get(product=product, user=request.user.username)",
+        "peekOfCode": "def shop(request):\n    products = Product.objects.all()\n    return render(request, 'home/shop.html', {'pro': products})\ndef singleProduct(request,id):\n    product = Product.objects.get(id=id)\n    return render(request, 'home/singleProduct.html', {'pro': product})\ndef add_to_cart(request, product_id):\n    product = Product.objects.get(id=product_id)\n    try:\n        cart = Cart.objects.get(user=request.user, product=product)",
         "detail": "home.views",
         "documentation": {}
     },
@@ -1203,7 +1245,7 @@
         "kind": 2,
         "importPath": "home.views",
         "description": "home.views",
-        "peekOfCode": "def singleProduct(request,id):\n    product = Product.objects.get(id=id)\n    return render(request, 'home/singleProduct.html', {'pro': product})\ndef add_to_cart(request, product_id):\n    product = Product.objects.get(id=product_id)\n    try:\n        cart = Cart.objects.get(product=product, user=request.user.username)\n        cart.quantity += 1\n        cart.save()\n    except Cart.DoesNotExist:",
+        "peekOfCode": "def singleProduct(request,id):\n    product = Product.objects.get(id=id)\n    return render(request, 'home/singleProduct.html', {'pro': product})\ndef add_to_cart(request, product_id):\n    product = Product.objects.get(id=product_id)\n    try:\n        cart = Cart.objects.get(user=request.user, product=product)\n        cart.quantity += 1\n        cart.save()\n    except Cart.DoesNotExist:",
         "detail": "home.views",
         "documentation": {}
     },
@@ -1212,7 +1254,16 @@
         "kind": 2,
         "importPath": "home.views",
         "description": "home.views",
-        "peekOfCode": "def add_to_cart(request, product_id):\n    product = Product.objects.get(id=product_id)\n    try:\n        cart = Cart.objects.get(product=product, user=request.user.username)\n        cart.quantity += 1\n        cart.save()\n    except Cart.DoesNotExist:\n        Cart.objects.create(product=product, user=request.user.username, quantity=1)\n    return redirect(request.META.get('HTTP_REFERER', '/'))\ndef checkout(request):",
+        "peekOfCode": "def add_to_cart(request, product_id):\n    product = Product.objects.get(id=product_id)\n    try:\n        cart = Cart.objects.get(user=request.user, product=product)\n        cart.quantity += 1\n        cart.save()\n    except Cart.DoesNotExist:\n        cart = Cart.objects.create(product=product, user=request.user, quantity=1)\n    return redirect(request.META.get('HTTP_REFERER', '/'))\ndef some_view(request):",
+        "detail": "home.views",
+        "documentation": {}
+    },
+    {
+        "label": "some_view",
+        "kind": 2,
+        "importPath": "home.views",
+        "description": "home.views",
+        "peekOfCode": "def some_view(request):\n    cart_items = Cart.objects.filter(user=request.user)\n    total_price = sum(item.product.price * item.quantity for item in cart_items)\n    return render(request, 'template.html', {'cart_items': cart_items, 'total_price': total_price})\ndef checkout(request):\n    return render(request, 'home/checkout.html')",
         "detail": "home.views",
         "documentation": {}
     },

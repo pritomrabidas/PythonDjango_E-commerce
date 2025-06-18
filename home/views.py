@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Slider,Product,Cart
+from .models import Cart, Product, Slider
 from django.core.mail import send_mail , BadHeaderError
 from django.conf import settings
 from django.contrib import messages
@@ -50,16 +50,22 @@ def singleProduct(request,id):
     product = Product.objects.get(id=id)
     return render(request, 'home/singleProduct.html', {'pro': product})
 
+
 def add_to_cart(request, product_id):
     product = Product.objects.get(id=product_id)
     try:
-        cart = Cart.objects.get(product=product, user=request.user.username)
+        cart = Cart.objects.get(user=request.user, product=product)
         cart.quantity += 1
         cart.save()
     except Cart.DoesNotExist:
-        Cart.objects.create(product=product, user=request.user.username, quantity=1)
-        
+        cart = Cart.objects.create(product=product, user=request.user, quantity=1)
     return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+def some_view(request):
+    cart_items = Cart.objects.filter(user=request.user)
+    total_price = sum(item.product.price * item.quantity for item in cart_items)
+    return render(request, 'template.html', {'cart_items': cart_items, 'total_price': total_price})
 
 def checkout(request):
     return render(request, 'home/checkout.html')
